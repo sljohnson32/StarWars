@@ -3,6 +3,7 @@ import Button from '../Button';
 // import './Header.css';
 
 class DisplayBox extends Component {
+
   render() {
     const { getPeople, getPlanets, getVehicles } = this.props;
     return (

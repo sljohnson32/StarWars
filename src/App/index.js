@@ -4,6 +4,7 @@ import Header from '../Header';
 import DisplayBox from '../DisplayBox';
 import './App.css';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -12,12 +13,28 @@ class App extends Component {
     };
   }
 
+  getPeople() {
+    console.log('people');
+  }
+
+  getPlanets() {
+    console.log('planets');
+  }
+
+  getVehicles() {
+    console.log('vehicles');
+  }
+
   render() {
     return (
       <div className="App">
         <SideBar />
         <Header />
-        <DisplayBox />
+        <DisplayBox
+          getPeople={ this.getPeople.bind(this) }
+          getPlanets={ this.getPlanets.bind(this) }
+          getVehicles={ this.getVehicles.bind(this) }
+        />
       </div>
     );
   }
