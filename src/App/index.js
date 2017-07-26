@@ -4,13 +4,28 @@ import Header from '../Header';
 import DisplayBox from '../DisplayBox';
 import './App.css';
 
+function getRandomArbitrary(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       favorites: '',
+      introText: ''
     };
+  }
+
+  componentDidMount() {
+    const rando = getRandomArbitrary(1, 8);
+    console.log(rando);
+    fetch(`https://swapi.co/api/films/${rando}/`).then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log(data)
+      // this.setState({ introText: data.value[0] })
+    })
   }
 
   getPeople() {
