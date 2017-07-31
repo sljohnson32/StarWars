@@ -24,7 +24,7 @@ class App extends Component {
       return response.json();
     }).then((data) => {
       console.log(data)
-      // this.setState({ introText: data.value[0] })
+      this.setState({ introText: data.opening_crawl })
     })
   }
 
