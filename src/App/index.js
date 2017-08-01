@@ -44,12 +44,14 @@ class App extends Component {
     return (
       <div className="App">
         <SideBar introText={ this.state.introText }/>
-        <Header />
-        <DisplayBox
-          getPeople={ this.getPeople.bind(this) }
-          getPlanets={ this.getPlanets.bind(this) }
-          getVehicles={ this.getVehicles.bind(this) }
-        />
+        <section className="MainSection">
+          <Header />
+          <DisplayBox
+            getPeople={ this.getPeople.bind(this) }
+            getPlanets={ this.getPlanets.bind(this) }
+            getVehicles={ this.getVehicles.bind(this) }
+          />
+        </section>
       </div>
     );
   }

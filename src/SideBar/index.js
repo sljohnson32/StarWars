@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './Header.css';
+import './SideBar.css';
 
 const SideBar = (props) => {
   const { introText } = props;
