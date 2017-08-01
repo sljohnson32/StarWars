@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SideBar />
+        <SideBar introText={ this.state.introText }/>
         <Header />
         <DisplayBox
           getPeople={ this.getPeople.bind(this) }
