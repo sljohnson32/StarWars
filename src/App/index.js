@@ -12,8 +12,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      favorites: '',
-      introText: ''
+      favorites: [],
+      introText: '',
+      displayType: '',
+      displayData: []
     };
   }
 
@@ -23,21 +25,35 @@ class App extends Component {
     fetch(`https://swapi.co/api/films/${rando}/`).then((response) => {
       return response.json();
     }).then((data) => {
-      console.log(data)
       this.setState({ introText: data.opening_crawl })
     })
   }
 
   getPeople() {
-    console.log('people');
+    fetch('https://swapi.co/api/people/').then((response) => {
+      return response.json();
+    }).then((data) => {
+      this.setState({ displayData: data.results })
+    })
+    this.setState({ displayType: 'people' })
   }
 
   getPlanets() {
-    console.log('planets');
+    fetch('https://swapi.co/api/planets/').then((response) => {
+      return response.json();
+    }).then((data) => {
+      this.setState({ displayData: data.results })
+    })
+    this.setState({ displayType: 'planets' })
   }
 
   getVehicles() {
-    console.log('vehicles');
+    fetch('https://swapi.co/api/vehicles/').then((response) => {
+      return response.json();
+    }).then((data) => {
+      this.setState({ displayData: data.results })
+    })
+    this.setState({ displayType: 'vehicles' })
   }
 
   render() {
@@ -50,6 +66,7 @@ class App extends Component {
             getPeople={ this.getPeople.bind(this) }
             getPlanets={ this.getPlanets.bind(this) }
             getVehicles={ this.getVehicles.bind(this) }
+            displayType = { this.state.displayType }
           />
         </section>
       </div>

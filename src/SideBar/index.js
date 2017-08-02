@@ -5,7 +5,7 @@ const SideBar = (props) => {
   const { introText } = props;
   return (
     <div className="SideBar">
-      <h2>{ introText }</h2>
+      <p>{ introText }</p>
     </div>
   );
 }
