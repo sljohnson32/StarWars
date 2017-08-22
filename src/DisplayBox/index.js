@@ -3,24 +3,28 @@ import Button from '../Button';
 // import './Header.css';
 
 class DisplayBox extends Component {
+
   render() {
-    const { getPeople, getPlanets, getVehicles } = this.props;
+    const { getData } = this.props;
     return (
       <div className="DisplayBox">
         <Button
           name={ 'people-button'}
           btnText={ 'people' }
-          func={ getPeople }
+          displayType = { 'people' }
+          func={ getData }
         />
         <Button
           name={ 'planet-button'}
           btnText={ 'planets' }
-          func={ getPlanets }
+          displayType = { 'planet' }
+          func={ getData }
         />
         <Button
           name={ 'vehicles-button'}
           btnText={ 'vehicles' }
-          func={ getVehicles }
+          displayType = { 'vehicles' }
+          func={ getData }
         />
         <h2>This is where stuff will be displayed</h2>
       </div>

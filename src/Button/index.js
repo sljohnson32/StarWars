@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import './Header.css';
+import './Button.css';
 
 const Button = (props) => {
-  const { name, func, btnText, disableTrigger } = props;
+  const { name, func, btnText, displayType } = props;
   return (
     <button
       className={ name }
-      disabled={disableTrigger}
+      active={ displayType == btnText ? true : false }
       onClick={ () => func() }
     >{ btnText }</button>
   );

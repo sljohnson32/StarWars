@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-// import './Header.css';
+import './SideBar.css';
 
-class SideBar extends Component {
-  render() {
-    return (
-      <div className="SideBar">
-        <h2>This is a side bar</h2>
-      </div>
-    );
-  }
+const SideBar = (props) => {
+  const { introText } = props;
+  return (
+    <div className="SideBar">
+      <p>{ introText }</p>
+    </div>
+  );
 }
 
 export default SideBar;
