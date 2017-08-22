@@ -12,11 +12,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      displayData: [],
       favorites: [],
-      introText: '',
-      displayType: '',
-      displayData: []
+      introText: ''
     };
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
@@ -29,32 +29,32 @@ class App extends Component {
     })
   }
 
-  getPeople() {
-    fetch('https://swapi.co/api/people/').then((response) => {
+  getData(input) {
+    fetch(`https://swapi.co/api/${input}/`).then((response) => {
       return response.json();
+      //add step to clean/organize data
     }).then((data) => {
       this.setState({ displayData: data.results })
     })
-    this.setState({ displayType: 'people' })
   }
 
-  getPlanets() {
-    fetch('https://swapi.co/api/planets/').then((response) => {
-      return response.json();
-    }).then((data) => {
-      this.setState({ displayData: data.results })
-    })
-    this.setState({ displayType: 'planets' })
-  }
-
-  getVehicles() {
-    fetch('https://swapi.co/api/vehicles/').then((response) => {
-      return response.json();
-    }).then((data) => {
-      this.setState({ displayData: data.results })
-    })
-    this.setState({ displayType: 'vehicles' })
-  }
+  // getPlanets() {
+  //   fetch('https://swapi.co/api/planets/').then((response) => {
+  //     return response.json();
+  //   }).then((data) => {
+  //     this.setState({ displayData: data.results })
+  //   })
+  //   this.setState({ displayType: 'planets' })
+  // }
+  //
+  // getVehicles() {
+  //   fetch('https://swapi.co/api/vehicles/').then((response) => {
+  //     return response.json();
+  //   }).then((data) => {
+  //     this.setState({ displayData: data.results })
+  //   })
+  //   this.setState({ displayType: 'vehicles' })
+  // }
 
   render() {
     return (
@@ -63,10 +63,7 @@ class App extends Component {
         <section className="MainSection">
           <Header />
           <DisplayBox
-            getPeople={ this.getPeople.bind(this) }
-            getPlanets={ this.getPlanets.bind(this) }
-            getVehicles={ this.getVehicles.bind(this) }
-            displayType = { this.state.displayType }
+            getData={ this.getData }
           />
         </section>
       </div>

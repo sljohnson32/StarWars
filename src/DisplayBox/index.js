@@ -5,26 +5,26 @@ import Button from '../Button';
 class DisplayBox extends Component {
 
   render() {
-    const { getPeople, getPlanets, getVehicles, displayType } = this.props;
+    const { getData } = this.props;
     return (
       <div className="DisplayBox">
         <Button
           name={ 'people-button'}
           btnText={ 'people' }
-          displayType = { displayType }
-          func={ getPeople }
+          displayType = { 'people' }
+          func={ getData }
         />
         <Button
           name={ 'planet-button'}
           btnText={ 'planets' }
-          displayType = { displayType }
-          func={ getPlanets }
+          displayType = { 'planet' }
+          func={ getData }
         />
         <Button
           name={ 'vehicles-button'}
           btnText={ 'vehicles' }
-          displayType = { displayType }
-          func={ getVehicles }
+          displayType = { 'vehicles' }
+          func={ getData }
         />
         <h2>This is where stuff will be displayed</h2>
       </div>
