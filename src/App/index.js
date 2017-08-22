@@ -59,7 +59,7 @@ class App extends Component {
           newObj.homePop = data[0].population
           newObj.species = data[1].name
         })
-        return newObj;
+        return newObj
       })
     }
   }
@@ -71,6 +71,7 @@ class App extends Component {
         <MainSection
           getData={ this.getData }
           displayType={ this.state.displayType }
+          displayData={ this.state.displayData }
           loading={ this.state.loading }
         />
       </div>
