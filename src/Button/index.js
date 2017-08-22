@@ -5,7 +5,7 @@ const Button = (props) => {
   const { name, func, btnText, displayType } = props;
   return (
     <button
-      className={ displayType === btnText ?
+      className={ displayType === btnText.toLowerCase() ?
         'button active' : 'button' }
       onClick={ () => func(btnText.toLowerCase()) }
     >{ btnText }</button>

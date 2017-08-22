@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SideBar from '../SideBar';
-import Header from '../Header';
-import DisplayBox from '../DisplayBox';
+import MainSection from '../MainSection';
 import './App.css';
 
 function getRandomArbitrary(min, max) {
@@ -14,7 +13,9 @@ class App extends Component {
     this.state = {
       displayData: [],
       favorites: [],
-      introText: ''
+      introText: '',
+      displayType: '',
+      loading: false
     };
     this.getData = this.getData.bind(this);
   }
@@ -31,6 +32,7 @@ class App extends Component {
   }
 
   getData(key) {
+    this.setState({ loading: true, displayType: key })
     fetch(`https://swapi.co/api/${key}/`)
       .then(response => response.json())
       .then(data => {
@@ -38,7 +40,7 @@ class App extends Component {
         return Object.assign(dataType, {results: data.results})
       })
       .then(data => this.formatData(data))
-      .then(data => this.setState({ displayData: data }))
+      .then(data => this.setState({ displayData: data, loading: false }))
   }
 
   formatData(data) {
@@ -66,12 +68,11 @@ class App extends Component {
     return (
       <div className="App">
         <SideBar introText={ this.state.introText }/>
-        <section className="MainSection">
-          <Header />
-          <DisplayBox
-            getData={ this.getData }
-          />
-        </section>
+        <MainSection
+          getData={ this.getData }
+          displayType={ this.state.displayType }
+          loading={ this.state.loading }
+        />
       </div>
     );
   }
