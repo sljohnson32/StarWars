@@ -47,11 +47,14 @@ class App extends Component {
   formatData(data) {
     if (data.type === 'people') {
       const promiseArr = data.results.map(person => {
-        const { name, homeworld, species } = person;
+        const { name, homeworld, species, films } = person;
         const personObj = { type: data.type, name: name };
         const planetPromise = fetch(homeworld).then(resp => resp.json());
         const speciesPromise = fetch(species).then(resp => resp.json());
-        return Promise.all([personObj, planetPromise, speciesPromise]);
+        const filmsPromise = films.map(film => {
+          return fetch(film).then(resp => resp.json());
+        })
+        return Promise.all([personObj, planetPromise, speciesPromise, filmsPromise]);
       })
 
       Promise.all(promiseArr)
@@ -61,7 +64,8 @@ class App extends Component {
           type: person[0].type,
           home: person[1].name,
           homePop: person[1].population,
-          species: person[2].name
+          species: person[2].name,
+          films: person[3]
         }
       }))
       .then(data => this.setState({ displayData: data, loading: false }))
@@ -77,7 +81,7 @@ class App extends Component {
         })
         return Promise.all([planetObj, Promise.all(residentsPromise)]);
       })
-      console.log(promiseArr)
+
       Promise.all(promiseArr)
       .then(data => data.map(planet => {
         return {
@@ -93,7 +97,6 @@ class App extends Component {
 
     //VEHICLES
     if (data.type === 'vehicles') {
-      console.log(data.results[0]);
       const promiseArr = data.results.map(vehicle => {
         const { name, model, vehicle_class, passengers, films } = vehicle;
         const vehicleObj = { type: data.type, name: name, model: model, veh_class: vehicle_class, passengers: passengers };
@@ -102,11 +105,12 @@ class App extends Component {
         })
         return Promise.all([vehicleObj, Promise.all(filmsPromise)]);
       })
-      console.log(promiseArr)
+
       Promise.all(promiseArr)
       .then(data => data.map(vehicle => {
         return {
           name: vehicle[0].name,
+          type: vehicle[0].type,
           model: vehicle[0].model,
           vehicle_class: vehicle[0].veh_class,
           passengers: vehicle[0].passengers,
