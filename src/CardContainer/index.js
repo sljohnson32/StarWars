@@ -1,6 +1,7 @@
 import React from 'react';
 import Spinner from '../Spinner'
 import Card from '../Card'
+import './CardContainer.css'
 
 const CardContainer = (props) => {
   const { loading, displayData } = props;
