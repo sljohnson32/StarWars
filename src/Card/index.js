@@ -1,13 +1,11 @@
 import React from 'react';
 
 const Card = (props) => {
-  const { data } = props;
-
-  const { name, home, homePop, species } = data
+  const { type, name, species, home, homePop } = props.data;
 
   return (
     <div className="CardContainer">
-      {data.type === 'people' ?
+      {type === 'people' ?
         <div className={'card'}>
           {name}
           {species}
