@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Button.css';
 
 const Button = (props) => {
-  const { name, func, btnText, displayType } = props;
+  const { func, btnText, displayType } = props;
   return (
     <button
       className={ displayType === btnText.toLowerCase() ?
