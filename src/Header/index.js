@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import './Header.css';
+import './Header.css';
 
 class Header extends Component {
   render() {
     return (
-      <div className="Header">
+      <div className="header">
         <h2>SWAPI-Box</h2>
       </div>
     );

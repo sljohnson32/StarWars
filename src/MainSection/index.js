@@ -10,9 +10,9 @@ class MainSection extends Component {
   render() {
     const { getData, displayType, loading, displayData } = this.props;
     return (
-      <div className='MainSection'>
+      <div className='mainSection'>
         <Header />
-        <div className="DisplayBox">
+        <div className="btnBox">
           <Button
             btnText={ 'People' }
             displayType = { displayType }
@@ -28,10 +28,10 @@ class MainSection extends Component {
             displayType = { displayType }
             func={ getData }
           />
-          <CardContainer loading={ loading }
-                         displayData={ displayData }
-          />
         </div>
+        <CardContainer loading={ loading }
+                       displayData={ displayData }
+        />
       </div>
     );
   }
