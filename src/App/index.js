@@ -40,27 +40,34 @@ class App extends Component {
         return Object.assign(dataType, {results: data.results})
       })
       .then(data => this.formatData(data))
-      .then(data => this.setState({ displayData: data, loading: false }))
+      // .then(data => this.setState({ displayData: data, loading: false }))
   }
 
   formatData(data) {
     if (data.type === 'people') {
-      return data.results.map(person => {
-        const newObj = {
-          type: data.type,
-          name: person.name
-        }
-
-        const planet = fetch(person.homeworld).then(resp => resp.json())
-        const species = fetch(person.species).then(resp => resp.json())
-
-        Promise.all([planet, species]).then(data => {
-          newObj.home = data[0].name
-          newObj.homePop = data[0].population
-          newObj.species = data[1].name
-        })
-        return newObj
+      const promiseArr = data.results.map(person => {
+        const personObj = { type: data.type, name: person.name };
+        const planet = fetch(person.homeworld).then(resp => resp.json());
+        const species = fetch(person.species).then(resp => resp.json());
+        return Promise.all([personObj, planet, species]);
       })
+
+      Promise.all(promiseArr)
+      .then(data => data.map(person => {
+        return {
+          name: person[0].name,
+          type: person[0].type,
+          home: person[1].name,
+          homePop: person[1].population,
+          species: person[2].name
+        }
+      })).then(data => this.setState({ displayData: data, loading: false }))
+    }
+    if (data.type === 'planets') {
+      console.log(data.type)
+    }
+    if (data.type === 'vehicles') {
+      console.log(data.type)
     }
   }
 
@@ -80,21 +87,3 @@ class App extends Component {
 }
 
 export default App;
-
-// getPlanets() {
-//   fetch('https://swapi.co/api/planets/').then((response) => {
-//     return response.json();
-//   }).then((data) => {
-//     this.setState({ displayData: data.results })
-//   })
-//   this.setState({ displayType: 'planets' })
-// }
-//
-// getVehicles() {
-//   fetch('https://swapi.co/api/vehicles/').then((response) => {
-//     return response.json();
-//   }).then((data) => {
-//     this.setState({ displayData: data.results })
-//   })
-//   this.setState({ displayType: 'vehicles' })
-// }
