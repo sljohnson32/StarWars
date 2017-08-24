@@ -8,26 +8,24 @@ import CardContainer from '../CardContainer';
 class MainSection extends Component {
 
   render() {
-    const { getData, displayType, loading, displayData, handleFav, favorites } = this.props;
+    const { getData, displayType, loading, displayData, handleFav, favorites, displayFavs } = this.props;
     return (
       <div className='mainSection'>
-        <Header />
+        <Header displayFavs={ displayFavs }
+                favorites={ favorites }/>
         <div className="btnBox">
           <Button
             btnText={ 'People' }
             displayType = { displayType }
-            func={ getData }
-          />
+            func={ getData } />
           <Button
             btnText={ 'Planets' }
             displayType = { displayType }
-            func={ getData }
-          />
+            func={ getData } />
           <Button
             btnText={ 'Vehicles' }
             displayType = { displayType }
-            func={ getData }
-          />
+            func={ getData } />
         </div>
         <CardContainer loading={ loading }
                        displayData={ displayData }

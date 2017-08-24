@@ -19,6 +19,7 @@ class App extends Component {
     };
     this.getData = this.getData.bind(this);
     this.handleFav = this.handleFav.bind(this);
+    this.displayFavs = this.displayFavs.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +71,10 @@ class App extends Component {
     if (this.state.favorites.find(data => data.name === name) != undefined) {
       return true;
     } else return false;
+  }
+
+  displayFavs() {
+    this.setState({ displayData: this.state.favorites })
   }
 
   formatData(data) {
@@ -159,7 +164,8 @@ class App extends Component {
           displayData={ this.state.displayData }
           loading={ this.state.loading }
           handleFav={ this.handleFav }
-        />
+          displayFavs={ this.displayFavs }
+          favorites={ this.state.favorites } />
       </div>
     );
   }
