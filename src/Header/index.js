@@ -9,7 +9,11 @@ const Header = (props) => {
     <div className="header">
       <h2>SWAPI-Box</h2>
       <div className='favBtn-container'>
-        <button onClick={ () => displayFavs() }>Favorites<div className='favNumber'>{favorites.length}</div></button>
+        <button 
+          disabled={ favorites.length === 0 }
+          onClick={ () => displayFavs() }>
+          <h4>Favorites<div className='favNumber'>{favorites.length}</div></h4>
+        </button>
       </div>
     </div>
     );
