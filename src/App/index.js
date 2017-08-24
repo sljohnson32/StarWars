@@ -31,6 +31,10 @@ class App extends Component {
     .then((data) => {
       this.setState({ introText: data.opening_crawl })
     })
+    let storedFavs = JSON.parse(localStorage.getItem('favorites'))
+    if (storedFavs != null) {
+      this.setState({ favorites: storedFavs })
+    }
   }
 
   getData(key) {
@@ -59,12 +63,14 @@ class App extends Component {
   addFav(data) {
     this.state.favorites.push(data)
     this.setState({ favorites: this.state.favorites })
+    localStorage.setItem('favorites', JSON.stringify(this.state.favorites))
   }
 
   removeFav(data) {
     const favIndex = this.state.favorites.indexOf(data)
     this.state.favorites.splice(favIndex, 1)
     this.setState({ favorites: this.state.favorites })
+    localStorage.setItem('favorites', JSON.stringify(this.state.favorites))
   }
 
   isFav(name) {
