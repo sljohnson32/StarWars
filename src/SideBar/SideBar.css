@@ -17,11 +17,11 @@
   animation: scroll-up 10s linear infinite;
 }
 
-/*@keyframes scroll-up {
+@keyframes scroll-up {
   0%   {
     transform: translateY(100%);
   }
   100% {
     transform: translateY(-100%);
   }
-}*/
+}

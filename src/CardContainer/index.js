@@ -4,11 +4,11 @@ import Card from '../Card'
 import './CardContainer.css'
 
 const CardContainer = (props) => {
-  const { loading, displayData } = props;
+  const { loading, displayData, handleFav, favorites } = props;
 
   return (
     <div className="CardContainer">
-      { loading ? <Spinner /> : displayData.map((data, i) => <Card data={ data } key={i} />) }
+      { loading ? <Spinner /> : displayData.map((data, i) => <Card data={ data } handleFav={ handleFav } key={i} />) }
     </div>
   );
 }
