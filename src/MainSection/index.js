@@ -8,7 +8,7 @@ import CardContainer from '../CardContainer';
 class MainSection extends Component {
 
   render() {
-    const { getData, displayType, loading, displayData } = this.props;
+    const { getData, displayType, loading, displayData, handleFav, favorites } = this.props;
     return (
       <div className='mainSection'>
         <Header />
@@ -31,6 +31,7 @@ class MainSection extends Component {
         </div>
         <CardContainer loading={ loading }
                        displayData={ displayData }
+                       handleFav={ handleFav }
         />
       </div>
     );

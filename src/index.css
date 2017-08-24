@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.favBtn {
+  color: gold;
+  border-color: black
+}

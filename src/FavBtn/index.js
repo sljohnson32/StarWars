@@ -1,37 +1,18 @@
 import React from 'react';
 // import './FavBtn.css';
 
-const FavBtn = () => {
-  // const {  } = props;
-
-  const tester = false;
-
-  const displayFavBtn = () => {
-    if (tester === true) {
-      return (
-        <div className='favBtn'>
-          <p>&#9825;</p>
-        </div>
-      )
-    }
-    if(tester === false) {
-      return (
-        <div className='favBtn active'>
-          <p>&#x2665;</p>
-        </div>
-      )
-    }
-  }
+const FavBtn = (props) => {
+  const { data, handleFav } = props;
 
   return (
     <button
-      onClick={ () => console.log('FAV BTN') }
-    >{displayFavBtn()}</button>
+      onClick={ () => handleFav(data.name) }>
+      { data.fav ?
+        <div className='favBtn'><p>&#x2665;</p></div> :
+        <div className='favBtn'><p>&#9825;</p></div>
+      }
+    </button>
   );
 }
 
 export default FavBtn;
-
-
-// className={  favorites.find(name)?
-//   'favBtn active' : 'favBtn'

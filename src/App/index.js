@@ -18,18 +18,19 @@ class App extends Component {
       loading: false
     };
     this.getData = this.getData.bind(this);
+    this.handleFav = this.handleFav.bind(this);
   }
 
-  // componentDidMount() {
-  //   const rando = getRandomArbitrary(1, 8);
-  //   fetch(`https://swapi.co/api/films/${rando}/`)
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     this.setState({ introText: data.opening_crawl })
-  //   })
-  // }
+  componentDidMount() {
+    const rando = getRandomArbitrary(1, 8);
+    fetch(`https://swapi.co/api/films/${rando}/`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.setState({ introText: data.opening_crawl })
+    })
+  }
 
   getData(key) {
     this.setState({ loading: true, displayType: key })
@@ -39,9 +40,36 @@ class App extends Component {
         const dataType = {type: key}
         return Object.assign(dataType, {results: data.results})
       })
-      // .then(data => console.log(data.results[0]))
       .then(data => this.formatData(data))
+  }
 
+  handleFav(name) {
+    let newArr = this.state.displayData.map(data => {
+      if (name === data.name) {
+        data.fav = !data.fav
+        data.fav ? this.addFav(data) :
+                   this.removeFav(data)
+      }
+      return data
+    })
+    this.setState({ displayData: newArr })
+  }
+
+  addFav(data) {
+    this.state.favorites.push(data)
+    this.setState({ favorites: this.state.favorites })
+  }
+
+  removeFav(data) {
+    const favIndex = this.state.favorites.indexOf(data)
+    this.state.favorites.splice(favIndex, 1)
+    this.setState({ favorites: this.state.favorites })
+  }
+
+  isFav(name) {
+    if (this.state.favorites.find(data => data.name === name) != undefined) {
+      return true;
+    } else return false;
   }
 
   formatData(data) {
@@ -65,13 +93,13 @@ class App extends Component {
           home: person[1].name,
           homePop: person[1].population,
           species: person[2].name,
-          films: person[3]
+          films: person[3],
+          fav: this.isFav(person[0].name)
         }
       }))
       .then(data => this.setState({ displayData: data, loading: false }))
     }
 
-    //PLANETS
     if (data.type === 'planets') {
       const promiseArr = data.results.map(planet => {
         const { name, terrain, population, climate, residents } = planet
@@ -90,12 +118,12 @@ class App extends Component {
           climate: planet[0].climate,
           population: planet[0].population,
           terrain: planet[0].terrain,
-          characters: planet[1]
+          characters: planet[1],
+          fav: this.isFav(planet[0].name)
         }
       })).then(data => this.setState({ displayData: data, loading: false }))
     }
 
-    //VEHICLES
     if (data.type === 'vehicles') {
       const promiseArr = data.results.map(vehicle => {
         const { name, model, vehicle_class, passengers, films } = vehicle;
@@ -114,7 +142,8 @@ class App extends Component {
           model: vehicle[0].model,
           vehicle_class: vehicle[0].veh_class,
           passengers: vehicle[0].passengers,
-          films: vehicle[1]
+          films: vehicle[1],
+          fav: this.isFav(vehicle[0].name)
         }
       })).then(data => this.setState({ displayData: data, loading: false }))
     }
@@ -129,6 +158,7 @@ class App extends Component {
           displayType={ this.state.displayType }
           displayData={ this.state.displayData }
           loading={ this.state.loading }
+          handleFav={ this.handleFav }
         />
       </div>
     );

@@ -12,7 +12,7 @@ const Card = (props) => {
         <div>
           <section className='card-header'>
             <h4>{name}</h4>
-            <FavBtn />
+            <FavBtn { ...props } />
           </section>
           <p>{species}</p>
           <p>{home}</p>
@@ -26,7 +26,7 @@ const Card = (props) => {
         <div>
           <section className='card-header'>
             <h4>{name}</h4>
-            <FavBtn />
+            <FavBtn { ...props } />
           </section>
           <p>{climate}</p>
           <p>{terrain}</p>
@@ -44,7 +44,7 @@ const Card = (props) => {
         <div>
           <section className='card-header'>
             <h4>{name}</h4>
-            <FavBtn />
+            <FavBtn { ...props } />
           </section>
           <p>{model}</p>
           <p>{vehicle_class}</p>
